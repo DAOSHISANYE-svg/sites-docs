@@ -16,7 +16,7 @@
 | SITES-TREE.md | 双站有哪些页/端点/表（页级结构） | workspace/（regen-docs 可再生） |
 | sites.manifest.yaml | 机器可读资源清单（守卫断言源） | workspace/ |
 | docs-index.md | 每个文档的家在哪 | workspace/ |
-| decisions/ADR-00X | 为什么这样设计（6 条，见下） | workspace/decisions/ |
+| decisions/ADR-00X | 为什么这样设计（7 条，见下） | workspace/decisions/ |
 | B8 报告（19 项定夺） | 哪些内容项等主人定夺 | C:/Users/junji/.hermes/output/xmg-b8-content-qa-report.md |
 
 ## 执行层（各仓）

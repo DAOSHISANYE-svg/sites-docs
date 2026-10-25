@@ -15,7 +15,7 @@ sites:
     cf: { kind: pages, project: xunmengge, domain: 33333344.xyz, build: none }
     publish_surface: { top_level: 38, dev_archive: _dev-archive/ (gitignored, 不发布) }
     api: { local_functions: ["/api/feedback", "/api/admin/errors"], rest: shared_worker }
-    pages_groups: { tests: 6, results: 12, general: 7, articles: 43, other: 25 }
+    pages_groups: { tests: 6, results: 12, general: 7, articles_subpages: 43(articles/ 下, 非目录), other: 25 }
     open_items: [B8-#1 master-test=sm-test 克隆, B8-#2 结果键 5 套, B8-#7 br.html 孤儿]
   - id: yunmengge
     name: 云梦阁
@@ -33,14 +33,14 @@ shared_backend:
   routes: ["api.33333344.xyz/*", "33333344.xyz/api/*", "2244444.xyz/api/*"]
   bindings:
     d1: { name: yunmengge-db, database_id: 65cdd645-a790-4e3f-9703-3167d34f9b18, isolation: "site 列 (xunmengge/yunmengge)" }
-    kv: { name: yunmengge-cache, id: "35a50ced…", optional: true, guard: "env 缺失自动跳过" }
+    kv: { name: yunmengge-cache, id: "[SECRET-KV-ID 或 wrangler kv key 实测值; 缺失=守卫式跳过不崩]", optional: true, guard: "env 缺失自动跳过" }
     durable_object: { name: RATE_LIMITER, class: RateLimiter }
   secrets_slots: [ADMIN_PASSWORD_HASH, JWT_SECRET, PII_KEY, PII_ENCRYPT]   # 槽位，值不落文档
   api_contract: { file: api-manifest.json, exact: 58, prefix: 7, regen: "node scripts/pre-deploy-check.mjs --gen-manifest" }
   migrations: { files: [002-add-site-to-content-tables.sql, 003-relax-username-unique.sql, 004-client-errors.sql, compliance-2026-07-18.sql], auto_in_ci: [003, compliance], manual: [002, 004], schema_source: migrations/SCHEMA.md }
   health_probe: { url: "https://33333344.xyz/api/health", expect: "200 + status=ok + service=yunmengge-router-v7 (version 动态, 勿比固定值)" }
 
-deploy_order: ["d1+kv+secrets", "yunmengge-router", "xunmengge-pages", "yunmengge-pages", "custom-domains"]
+deploy_order: ["d1+kv+secrets", "yunmengge-router", "simishuwu(寻梦阁 Pages xunmengge)", "yunmengge(云梦阁 Pages yunmengge)", "custom-domains"]
 
 invariants:   # 漂移守卫断言（sites-drift-guard 机器核）
   - "双仓 remote -v 名与本文件 repo.name 一致"

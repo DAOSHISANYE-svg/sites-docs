@@ -20,8 +20,6 @@ xmg: 共 50 目录 = 测试 6 + 结果 12（general 结果已计入）+ 其他 2
 
 ### 2.1 测试/结果页（本地实读全页对照）
 <!-- GEN:BEGIN §2-->
-| 路径 | title（本地实读） | 标注 |
-|---|---|---|
 | /pages/admin/ | 《管理面板 - 寻梦阁》 |  |
 | /pages/adult-tests/ | 《成人测试 - 寻梦阁》 |  |
 | /pages/api/ | 《API文档 - 寻梦阁》 |  |
@@ -49,10 +47,10 @@ xmg: 共 50 目录 = 测试 6 + 结果 12（general 结果已计入）+ 其他 2
 | /pages/green-result/ | 《绿奴属性测试结果 - 寻梦阁》 |  |
 | /pages/green-test/ | 《绿奴属性测试 - 寻梦阁》 |  |
 | /pages/hobbies-list/ | 《兴趣标签 - 寻梦阁》 |  |
-| /pages/jars/ | 《性癖瓶子 · 互动填涂 | 寻梦阁》 |  |
+| /pages/jars/ | 《性癖瓶子 · 互动填涂 \| 寻梦阁》 |  |
 | /pages/leaderboard/ | 《排行榜 - 寻梦阁》 |  |
 | /pages/login/ | 《登录 - 寻梦阁》 |  |
-| /pages/master-test/ | 《SM属性测试 - 你的真实欲望 - 寻梦阁》 | **B8#1 P0 = sm-test 完整克隆**（title/H1/跳转/sid 全同；独立化 or 301→sm-test 待主人） |
+| /pages/master-test/ | 《SM属性测试 - 你的真实欲望 - 寻梦阁》 | **B8#1 P0 = sm-test 完整克隆** |
 | /pages/members/ | 《圈友展示 - 寻梦阁》 |  |
 | /pages/memory-result/ | 《回忆测试结果 - 寻梦阁》 | ⚠️ test/result title 名实错位（B8 P1 类） |
 | /pages/memory-test/ | 《强奸回忆体验 - 寻梦阁》 |  |
@@ -71,12 +69,16 @@ xmg: 共 50 目录 = 测试 6 + 结果 12（general 结果已计入）+ 其他 2
 | /pages/submissions/ | 《圈友投稿 - 寻梦阁》 |  |
 | /pages/terms/ | 《用户协议 - 寻梦阁》 |  |
 | /pages/test/ | 《全部测试 - 寻梦阁》 |  |
-| /pages/wall/ | 《打招呼墙 - 向全体圈友打招呼 | 寻梦阁》 |  |
-| 路径 | title（本地实读） | 标注 |
-|---|---|---|
+| /pages/wall/ | 《打招呼墙 - 向全体圈友打招呼 \| 寻梦阁》 |  |
+<!-- GEN:END §2-->
+## 3. 云梦阁 pages 全量（32 目录 + 根级活页 leaderboard.html/article.html/blog.html；文章=单文件非目录）
+ymg: 共 32 目录 = 测试 6 + 结果 12（general 结果已计入）+ 其他 7
+
+### 3.1 测试/结果页（全页对照 · 再生数据节）
+<!-- GEN:BEGIN §3-->
 | /pages/admin/ | （无 index.html） |  |
 | /pages/bitch-result/ | 《女奴属性测试结果 - 云梦阁》 |  |
-| /pages/bitch-test/ | 《高潮引导仪式 - 云梦阁》 | test/result 命名错位（结果页=女奴属性结果） |
+| /pages/bitch-test/ | 《高潮引导仪式 - 云梦阁》 | test/result 命名错位 |
 | /pages/feedback/ | 《意见反馈 · 云梦阁》 |  |
 | /pages/general-attachment/ | 《依恋风格测试 - 云梦阁》 |  |
 | /pages/general-attachment-result/ | 《你的依恋类型测试结果 - 云梦阁》 |  |
@@ -106,13 +108,7 @@ xmg: 共 50 目录 = 测试 6 + 结果 12（general 结果已计入）+ 其他 2
 | /pages/sm-result/ | 《SM属性测试结果 - 云梦阁》 |  |
 | /pages/sm-test/ | 《SM属性测试 - 你的真实欲望 - 云梦阁》 |  |
 | /pages/submissions/ | 《圈友投稿 - 云梦阁》 |  |
-api-manifest: exact 58 + prefix 7（router 仓, 改路由须 --gen-manifest 重发）
-D1 增量表（migrations SQL 实测）: client_errors revoked_tokens users_new wall_messages
-<!-- GEN:END §2-->
- 云梦阁 pages 全量（51 目录；文章=根级单文件 article.html/blog.html）
-ymg: 共 32 目录 = 测试 6 + 结果 12（general 结果已计入）+ 其他 7
-
-### 3.1 测试/结果页（title 本地实读 + 跨站残留标注）
+<!-- GEN:END §3-->
 | 路径 | title | 标注 |
 |---|---|---|
 | /pages/master-test/ | 《主人综合测评 · 云梦阁》 | 正规功能（区别于 xmg P0 同名页） |
@@ -123,6 +119,11 @@ ymg: 共 32 目录 = 测试 6 + 结果 12（general 结果已计入）+ 其他 7
 | 根级活页 | leaderboard.html（/leaderboard/ 200 指向根文件） | _redirects 186 规则（200=71/301=74） |
 
 ## 4. 共享后端 yunmengge-router（/api/* 真源 · 70 端点全树）
+### 4.0 端点/D1 计数（再生数据节）
+<!-- GEN:BEGIN §4-->
+api-manifest: exact 58 + prefix 7（router 仓, 改路由须 --gen-manifest 重发）
+D1 增量表（migrations SQL 实测）: client_errors revoked_tokens users_new wall_messages
+<!-- GEN:END §4-->
 ```
 src/
 ├── index.js（路由壳，42/70 端点字面）
