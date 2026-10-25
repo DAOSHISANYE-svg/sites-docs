@@ -10,7 +10,7 @@
 | 云梦阁前端 | `DAOSHISANYE-svg/yunmengge`（本地目录 yunmengge-pages） | Pages 项目 `yunmengge` | 2244444.xyz | 静态零 build + _middleware.js |
 | 共享后端 | `DAOSHISANYE-svg/yunmengge-router` | Worker Service `yunmengge-router` | api.33333344.xyz + 双域 /api/* | 单 index.js + nodejs_compat，两站共用 D1（site 列隔离） |
 
-本地真源路径：`E:/hermes/workspace-repos/workspace/{simishuwu, yunmengge-pages, yunmengge-router}`。
+真源=GitHub 4 仓（`DAOSHISANYE-svg/{sites-docs, simishuwu, yunmengge, yunmengge-router}`）；本机工作区布局=`E:/hermes/workspace-repos/workspace/`（sites-docs 即该目录 git 仓；三源仓同级）。任何 AI 克隆 4 仓 + 读 WORKSTATION.md 即可复刻工作站。
 
 ## 2. 数据/绑定矩阵（复刻时全要建）
 | 资源 | 生产值 | 新部署 |
