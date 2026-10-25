@@ -42,3 +42,6 @@
 ## 明确不做（防双家漂移）
 - agent.json（/.well-known）= sites.manifest.yaml 的活体副本 → 违反 one home，不做；活体 agent 入口=llms.txt
 - SITES-TREE 手工副本进仓 → 违反单一真源；树只在 workspace（regen 再生）
+| RUNBOOK.md | 事故手册（8 故障模式四段式 + 不可逆即报） | sites-docs 仓 |
+| decisions/ADR-008 | 重工具链取舍（Terraform/Pyrra/OpenAPI/混沌，评估不引入+升级触发） | sites-docs 仓 |
+| integrate.json | org 级 agent 入口（repos/docs/tools/slo/redlines map） | sites-docs 仓 |

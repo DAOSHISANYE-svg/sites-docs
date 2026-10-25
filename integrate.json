@@ -1,0 +1,28 @@
+{
+  "org": "DAOSHISANYE-svg",
+  "updated": "2026-10-25",
+  "note": "org 级 agent 入口：给任何外部 AI 一个 map（仿全网 integrate.json 最佳实践，见 dev.to/allora 模式）。凭据一律不在此文件（槽位制）。",
+  "repos": [
+    { "name": "simishuwu", "role": "寻梦阁 33333344.xyz 前端（零 build 直发 CF Pages）", "clone": "https://github.com/DAOSHISANYE-svg/simishuwu", "agent_entry": "AGENTS.md + DEPLOY.md + llms.txt" },
+    { "name": "yunmengge", "role": "云梦阁 2244444.xyz 前端（零 build 直发 CF Pages；本地零 API，全走共享 Worker）", "clone": "https://github.com/DAOSHISANYE-svg/yunmengge", "agent_entry": "AGENTS.md + DEPLOY.md + llms.txt" },
+    { "name": "yunmengge-router", "role": "共享后端 Worker（CF D1 + KV + DO；api-manifest.json=契约源 58 exact + 7 prefix）", "clone": "https://github.com/DAOSHISANYE-svg/yunmengge-router", "agent_entry": "AGENTS.md + DEPLOY.md + api-manifest.json" },
+    { "name": "sites-docs", "role": "文档层仓（本仓：全组织 map / 项目树图 / ADR / RUNBOOK / 工具）", "clone": "https://github.com/DAOSHISANYE-svg/sites-docs", "agent_entry": "本文件 + SITES-INDEX.md + WORKSTATION.md" }
+  ],
+  "docs": {
+    "map": "SITES-INDEX.md", "tree": "SITES-TREE.md（GEN 节=再生）", "machine_manifest": "sites.manifest.yaml",
+    "decisions": "decisions/ADR-001..008", "incident": "RUNBOOK.md", "machine": "MACHINE-TREE.md", "onboarding": "WORKSTATION.md"
+  },
+  "tools": {
+    "regen": "tools/regen-docs.py --check（rc≠0=树图漂移）",
+    "guard": "E:/hermes/hermes-tools/sites-drift-guard.py（42 断言；cron 双日 9/21；全绿=[SILENT]）",
+    "workstation_check": "tools/workstation-check.py（16 项）",
+    "github_tunnel": "tools/karing-github-api.py（Karing :3066 CONNECT 隧道→GitHub REST，ADR-007）"
+  },
+  "slo": { "ledger": "E:/hermes/output/slo-ledger.jsonl", "d1_backup_fresh": "E:/hermes/d1-backups/*.sql (≤48h)", "cadence": "双日 9/21 guard 全绿时记账" },
+  "redlines": {
+    "content_zero_change": "双站既有内容/文案=合规，agent 不改一字（发现入 B8 报告制）",
+    "dual_site_separation": "寻梦阁归因不写云梦阁（及反向）",
+    "irreversible_report": "delete/zone/token/DNS/生产写/回滚=先报告后执行",
+    "secrets_slot": "密钥只走槽位，文档/日志不落真实值"
+  }
+}
