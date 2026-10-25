@@ -50,3 +50,6 @@
 | tools/lifecycle-guard.py | 生命周期守卫(backups 90 天归档/output 365 天标记, --dry/--run) | sites-docs 仓 tools/ |
 | tools/dependency-graph.py | 目录依赖图谱(--check 再生 dependency-graph.dot) | sites-docs 仓 tools/ |
 | E:/hermes/output/slo-ledger.jsonl | 文件式 SLO 台账(双日 guard 全绿记账, ADR-008) | 本机(不入仓) |
+| decisions/ADR-009-备份恢复分级与agent入口对齐.md | 备份 4 级置信 L2/L3 落地·L4 blocked-on-scope；llms.txt v2 + AGENTS 自查命令 | sites-docs 仓 decisions/ |
+| incidents/README.md | 事故/blameless postmortem 索引 + Open AIs 台账（ADR-009 起） | sites-docs 仓 incidents/ |
+| tools/backup-integrity-check.py | D1 备份 L2/L3 静态完整性（非空+可解析+CREATE TABLE/行数+sha256+尺寸漂移告警）| sites-docs 仓 tools/ |
