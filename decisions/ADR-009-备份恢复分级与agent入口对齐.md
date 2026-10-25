@@ -15,7 +15,7 @@
 | 备份 L2/L3 廉价完整性 | ✅ 落地 `tools/backup-integrity-check.py`（非空 + 头部可解析 + CREATE TABLE/行数计数 + sha256 记录 + 与上次尺寸对比告警），挂守卫 §14 + cron 每日 | L2/L3 便宜，应每跑都做；纯静态，不需 DB 连接 |
 | 备份 L4 真恢复演练 | ⏸ blocked-on-scope | 需 D1 读写 token 建 scratch 库并 `sqlite3 < backup.sql` + 行数对生产。当前 token 无 D1 写 scope（ADR-008 已记 scope 受限）。升级触发=拿到 D1 读写 scope |
 | llms.txt blockquote 摘要 | ✅ 两站已补 | v2 唯一强要求 |
-| `_headers` 加 `Link: describedby` | ✅ 两站已补 | v2 可发现性，agent 从任意 HTML 页可反查 llms.txt |
+| `_headers` 加 `Link: describedby` | ⏸ vendor-blocked（已撤行） | 实测 CF Pages _headers 不投递 Link 响应头（3+min 全路径 0 命中，同块 X-Frame-Options 生效）；替代方案=/llms.txt 直达+AGENTS.md 指路（已做）。升级触发=CF 放开或改走 _middleware.js 注头（成本高，暂不做） |
 | AGENTS.md 自查命令 | ✅ 三仓各补 1 块 | 让 agent 改完能一条命令自验 |
 
 ## 升级触发（何时重开）
