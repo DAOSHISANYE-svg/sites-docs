@@ -46,7 +46,7 @@ check("5 GitHub token（~/.git-credentials）", bool(tok), "git 曾推送 github
 
 # 6. 守卫脚本可跑（本地副本, 允许缺失=非本 Hermes 机）
 guard = os.path.join(os.path.dirname(os.path.dirname(WS)), "scripts", "sites-drift-guard.py")
-check("6 漂移守卫 33 断言（本机 Hermes 资产, 缺=只读工作站）", os.path.isfile(guard), "非 Hermes 主工作站可忽略")
+check("6 漂移守卫（本机 Hermes 资产, 缺=只读工作站）", os.path.isfile(guard), "非 Hermes 主工作站可忽略")
 
 # 7. 再生器 STABLE
 r = subprocess.run([PY, os.path.join(WS, "tools", "regen-docs.py"), "--check"],
@@ -63,6 +63,20 @@ for u, tag in [("https://33333344.xyz/api/health", "寻梦阁 API"), ("https://2
     code = subprocess.run(["curl", "-s", "-o", "NUL", "-w", "%{http_code}", "--max-time", "20", u],
                           capture_output=True, text=True, errors="replace").stdout.strip()
     check(f"9 活体 {tag}（{code}）", code == "200", "双站宕机或本机到 CF 出网异常; 判活三视角勿单点定论")
+
+# 10. 本地盘量预算（E 盘 free >= 20G, 防盘满=全 cron 死）
+r = subprocess.run("powershell -NoProfile -Command \"(Get-PSDrive E).Free/1GB\"",
+                   shell=True, capture_output=True, text=True, errors="replace", timeout=30)
+try:
+    free_gb = float(r.stdout.strip().splitlines()[-1])
+except Exception:
+    free_gb = -1
+check(f"10 E 盘余量预算（free {free_gb:.0f}G >= 20G）", free_gb >= 20, "E 盘将满: 按 workspace.layout.yaml 保留期缺口清理(backups/output/cache)")
+
+# 11. 布局契约 + 保留期审计（workspace.layout.yaml 无漂移）
+r = subprocess.run([PY, os.path.join(WS, "tools", "retention-audit.py"), "--check"],
+                   capture_output=True, text=True, errors="replace", timeout=120)
+check("11 本地布局契约（retention-audit --check, 新目录须入 workspace.layout.yaml）", r.returncode == 0, (r.stdout or r.stderr).strip()[-120:])
 
 bad = [x for x in res if not x["ok"]]
 print(json.dumps({"workstation": "READY" if not bad else "DEGRADED",

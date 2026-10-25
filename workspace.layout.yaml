@@ -1,0 +1,151 @@
+# workspace.layout.yaml · E:/hermes 75 顶层目录布局契约(机读版, 2026-10-25 数据驱动)
+> 配套: MACHINE-TREE.md(人读树) / tools/retention-audit.py --check(漂移+缺口+盘量断言)
+generated_from: cache/scratch/_ret_audit.json (2026-10-25)
+layers: {core: 运行面, engineer: 装层, qa: 审计面, backup: 备份面, cache: 可清面}
+disk_budget: {drive: E:, alert_free_gb: 20}
+entries:
+  - {dir: backups, layer: backup, mb: 15650.6, files: 3559, retention: 'GC 部分面: gate-checks 7 天+日志滚动; 53 子目录在 GC 外=缺口', gap: true}
+  - {dir: hermes-agent, layer: engineer, mb: 7043.0, files: 193435, retention: '长期(未分类)', gap: false}
+  - {dir: output, layer: core, mb: 6642.8, files: 7217, retention: '永久累积(交付物+gate 账本), 无保留期=缺口', gap: true}
+  - {dir: profiles, layer: core, mb: 4180.2, files: 77769, retention: '长期(未分类)', gap: false}
+  - {dir: .git, layer: engineer, mb: 3112.2, files: 213, retention: 'git 对象库, 长期(gc 按需)', gap: false}
+  - {dir: scripts, layer: engineer, mb: 2142.8, files: 367, retention: '长期(未分类)', gap: false}
+  - {dir: tools, layer: engineer, mb: 1905.5, files: 20174, retention: '长期(未分类)', gap: false}
+  - {dir: cache, layer: cache, mb: 1544.7, files: 53234, retention: '无保留期=缺口(建议 30 天滚动)', gap: true}
+  - {dir: scratch, layer: cache, mb: 934.0, files: 26027, retention: 'Hermes 内置 24h 剪枝', gap: false}
+  - {dir: installs, layer: engineer, mb: 785.7, files: 51006, retention: '长期(未分类)', gap: false}
+  - {dir: state-snapshots, layer: backup, mb: 519.0, files: 53, retention: 'checkpoint-prune.py', gap: false}
+  - {dir: plugins, layer: engineer, mb: 447.3, files: 24771, retention: '长期(未分类)', gap: false}
+  - {dir: kanban, layer: core, mb: 341.4, files: 17624, retention: '长期(未分类)', gap: false}
+  - {dir: workspace-repos, layer: engineer, mb: 309.7, files: 3079, retention: '长期(未分类)', gap: false}
+  - {dir: browser-profiles, layer: engineer, mb: 275.9, files: 1716, retention: '长期(未分类)', gap: false}
+  - {dir: checkpoints, layer: core, mb: 181.8, files: 4321, retention: '长期(未分类)', gap: false}
+  - {dir: screens, layer: qa, mb: 143.9, files: 178, retention: '长期(未分类)', gap: false}
+  - {dir: node, layer: engineer, mb: 110.6, files: 1938, retention: '长期(未分类)', gap: false}
+  - {dir: lsp, layer: engineer, mb: 89.3, files: 10461, retention: '长期(未分类)', gap: false}
+  - {dir: .worktrees, layer: engineer, mb: 70.9, files: 1324, retention: 'git worktree, 任务结项时清', gap: false}
+  - {dir: skills, layer: engineer, mb: 66.6, files: 1204, retention: '长期(未分类)', gap: false}
+  - {dir: llm-key-gateway, layer: engineer, mb: 45.8, files: 851, retention: '长期(未分类)', gap: false}
+  - {dir: profile, layer: core, mb: 45.3, files: 752, retention: '长期(未分类)', gap: false}
+  - {dir: bin, layer: engineer, mb: 41.5, files: 15, retention: '长期(未分类)', gap: false}
+  - {dir: .venv, layer: engineer, mb: 39.9, files: 738, retention: 'uv venv 装层, 版本滚动', gap: false}
+  - {dir: logs, layer: core, mb: 28.3, files: 174, retention: 'log-rotate.py 轮转', gap: false}
+  - {dir: cron, layer: core, mb: 25.0, files: 3179, retention: '长期(未分类)', gap: false}
+  - {dir: config, layer: core, mb: 23.0, files: 210, retention: '长期(未分类)', gap: false}
+  - {dir: d1-backups, layer: backup, mb: 18.3, files: 18, retention: '每日 SQL + 7 天滚动清理', gap: false}
+  - {dir: .curator_backups, layer: backup, mb: 16.7, files: 977, retention: 'curator 自动滚动', gap: false}
+  - {dir: sessions, layer: core, mb: 14.8, files: 41, retention: '长期(未分类)', gap: false}
+  - {dir: desktop-plugins, layer: engineer, mb: 14.5, files: 82, retention: '长期(未分类)', gap: false}
+  - {dir: qa-screenshots, layer: qa, mb: 11.6, files: 23, retention: '长期(未分类)', gap: false}
+  - {dir: team, layer: core, mb: 11.0, files: 387, retention: '长期(未分类)', gap: false}
+  - {dir: visual-qa, layer: qa, mb: 7.5, files: 17, retention: '长期(未分类)', gap: false}
+  - {dir: nachos, layer: cache, mb: 4.4, files: 21, retention: '长期(未分类)', gap: false}
+  - {dir: snapshots, layer: backup, mb: 4.3, files: 2, retention: '手动归档', gap: false}
+  - {dir: hermes-tools, layer: engineer, mb: 3.1, files: 295, retention: '长期(未分类)', gap: false}
+  - {dir: assets, layer: core, mb: 1.7, files: 6, retention: '长期(未分类)', gap: false}
+  - {dir: qa-d-audit, layer: qa, mb: 1.1, files: 70, retention: '长期(未分类)', gap: false}
+  - {dir: bot-groups, layer: core, mb: 1.0, files: 312, retention: '长期(未分类)', gap: false}
+  - {dir: memory-tencentdb-data, layer: core, mb: 0.3, files: 11, retention: '长期(未分类)', gap: false}
+  - {dir: pending, layer: core, mb: 0.2, files: 115, retention: '长期(未分类)', gap: false}
+  - {dir: tmp, layer: cache, mb: 0.2, files: 19, retention: '长期(未分类)', gap: false}
+  - {dir: agents, layer: core, mb: 0.1, files: 9, retention: '长期(未分类)', gap: false}
+  - {dir: bootstrap-cache, layer: cache, mb: 0.1, files: 1, retention: '长期(未分类)', gap: false}
+  - {dir: memory, layer: core, mb: 0.1, files: 2, retention: '长期(未分类)', gap: false}
+  - {dir: __pycache__, layer: cache, mb: 0.0, files: 1, retention: '长期(未分类)', gap: false}
+  - {dir: bot_relay, layer: core, mb: 0.0, files: 1, retention: '长期(未分类)', gap: false}
+  - {dir: checklists, layer: core, mb: 0.0, files: 4, retention: '长期(未分类)', gap: false}
+  - {dir: cron-memory, layer: core, mb: 0.0, files: 13, retention: '长期(未分类)', gap: false}
+  - {dir: gates, layer: core, mb: 0.0, files: 2, retention: '长期(未分类)', gap: false}
+  - {dir: gateway, layer: engineer, mb: 0.0, files: 1, retention: '长期(未分类)', gap: false}
+  - {dir: gateway-service, layer: engineer, mb: 0.0, files: 5, retention: '长期(未分类)', gap: false}
+  - {dir: hooks, layer: engineer, mb: 0.0, files: 2, retention: '长期(未分类)', gap: false}
+  - {dir: locks, layer: core, mb: 0.0, files: 1, retention: '长期(未分类)', gap: false}
+  - {dir: memories, layer: core, mb: 0.0, files: 8, retention: '长期(未分类)', gap: false}
+  - {dir: platforms, layer: engineer, mb: 0.0, files: 3, retention: '长期(未分类)', gap: false}
+  - {dir: plugin-update-checks, layer: cache, mb: 0.0, files: 2, retention: '长期(未分类)', gap: false}
+  - {dir: references, layer: core, mb: 0.0, files: 1, retention: '长期(未分类)', gap: false}
+  - {dir: runtime, layer: core, mb: 0.0, files: 3, retention: '长期(未分类)', gap: false}
+  - {dir: skill-bundles, layer: engineer, mb: 0.0, files: 1, retention: '长期(未分类)', gap: false}
+  - {dir: source-checks, layer: qa, mb: 0.0, files: 2, retention: '长期(未分类)', gap: false}
+  - {dir: state, layer: core, mb: 0.0, files: 5, retention: '长期(未分类)', gap: false}
+  - {dir: templates, layer: core, mb: 0.0, files: 5, retention: '长期(未分类)', gap: false}
+  - {dir: test-bot-workspace, layer: cache, mb: 0.0, files: 1, retention: '长期(未分类)', gap: false}
+  - {dir: vault, layer: backup, mb: 0.0, files: 1, retention: '密钥槽位, 永久', gap: false}
+  - {dir: workspace, layer: engineer, mb: 0.0, files: 2, retention: '长期(未分类)', gap: false}
+  - {dir: .curator_backups, layer: backup, mb: 0, files: 0, retention: 'curator 自动滚动', gap: false}
+  - {dir: .venv, layer: engineer, mb: 0, files: 0, retention: 'uv venv 装层, 版本滚动', gap: false}
+  - {dir: node, layer: engineer, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: state, layer: core, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: source-checks, layer: qa, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: logs, layer: core, mb: 0, files: 0, retention: 'log-rotate.py 轮转', gap: false}
+  - {dir: assets, layer: core, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: hooks, layer: engineer, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: scratch, layer: cache, mb: 0, files: 0, retention: 'Hermes 内置 24h 剪枝', gap: false}
+  - {dir: test-bot-workspace, layer: cache, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: config, layer: core, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: cron-memory, layer: core, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: agents, layer: core, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: sessions, layer: core, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: workspace-repos, layer: engineer, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: hermes-agent, layer: engineer, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: gateway-service, layer: engineer, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: bin, layer: engineer, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: qa-d-audit, layer: qa, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: desktop, layer: cache, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: tmp, layer: cache, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: llm-key-gateway, layer: engineer, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: kanban, layer: core, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: plugins, layer: engineer, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: checkpoints, layer: core, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: qa-screenshots, layer: qa, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: templates, layer: core, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: runtime, layer: core, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: screens, layer: qa, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: installs, layer: engineer, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: pets, layer: cache, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: d1-backups, layer: backup, mb: 0, files: 0, retention: '每日 SQL + 7 天滚动清理', gap: false}
+  - {dir: memory-tencentdb-data, layer: core, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: plugin-update-checks, layer: cache, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: visual-qa, layer: qa, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: profiles, layer: core, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: cron, layer: core, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: gateway, layer: engineer, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: checklists, layer: core, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: locks, layer: core, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: skill-bundles, layer: engineer, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: image_cache, layer: cache, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: proxy, layer: cache, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: skills, layer: engineer, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: .worktrees, layer: engineer, mb: 0, files: 0, retention: 'git worktree, 任务结项时清', gap: false}
+  - {dir: vault, layer: backup, mb: 0, files: 0, retention: '密钥槽位, 永久', gap: false}
+  - {dir: lsp, layer: engineer, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: team, layer: core, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: backups, layer: backup, mb: 0, files: 0, retention: 'GC 部分面: gate-checks 7 天+日志滚动; 53 子目录在 GC 外=缺口', gap: true}
+  - {dir: gates, layer: core, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: platforms, layer: engineer, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: .git, layer: engineer, mb: 0, files: 0, retention: 'git 对象库, 长期(gc 按需)', gap: false}
+  - {dir: tools, layer: engineer, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: memories, layer: core, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: backups-archive, layer: backup, mb: 0, files: 0, retention: '归档, 手动', gap: false}
+  - {dir: audio_cache, layer: cache, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: bot_relay, layer: core, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: hermes-tools, layer: engineer, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: desktop-plugins, layer: engineer, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: pending, layer: core, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: memory, layer: core, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: bootstrap-cache, layer: cache, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: references, layer: core, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: __pycache__, layer: cache, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: nachos, layer: cache, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: workspace, layer: engineer, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: cache, layer: cache, mb: 0, files: 0, retention: '无保留期=缺口(建议 30 天滚动)', gap: true}
+  - {dir: sandboxes, layer: engineer, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: snapshots, layer: backup, mb: 0, files: 0, retention: '手动归档', gap: false}
+  - {dir: output, layer: core, mb: 0, files: 0, retention: '永久累积(交付物+gate 账本), 无保留期=缺口', gap: true}
+  - {dir: state-snapshots, layer: backup, mb: 0, files: 0, retention: 'checkpoint-prune.py', gap: false}
+  - {dir: browser-profiles, layer: engineer, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: bot-groups, layer: core, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: profile, layer: core, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: scripts, layer: engineer, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: pending_messages, layer: core, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
+  - {dir: pairing, layer: cache, mb: 0, files: 0, retention: '长期(未分类)', gap: false}
