@@ -1,0 +1,51 @@
+# sites.manifest.yaml · 双站资源声明清单（机器可读单一真源）
+# 生成: 2026-10-25（数据驱动，全部经 git/curl/CF API 实测）
+# 用途: 其他 AI/工具解析资源拓扑；SITES-INDEX.md/SITES-TREE.md 的叙述层由此派生
+# 纪律: 值=事实（实测）；secrets 只写槽位名不落值；变更=更新本文件+跑 sites-drift-guard
+manifest: 1
+generated: "2026-10-25"
+generator: "hermes (A/B/C 全面检查 + 树图 v2)"
+
+sites:
+  - id: xunmengge
+    name: 寻梦阁
+    content_domain: adult   # 成人内容域
+    red_line: content_zero_change   # 内容零改动（B8 报告制）
+    repo: { org: DAOSHISANYE-svg, name: simishuwu, branch: main }
+    cf: { kind: pages, project: xunmengge, domain: 33333344.xyz, build: none }
+    publish_surface: { top_level: 38, dev_archive: _dev-archive/ (gitignored, 不发布) }
+    api: { local_functions: ["/api/feedback", "/api/admin/errors"], rest: shared_worker }
+    pages_groups: { tests: 6, results: 12, general: 7, articles: 43, other: 25 }
+    open_items: [B8-#1 master-test=sm-test 克隆, B8-#2 结果键 5 套, B8-#7 br.html 孤儿]
+  - id: yunmengge
+    name: 云梦阁
+    content_domain: standard
+    repo: { org: DAOSHISANYE-svg, name: yunmengge, local_dir: yunmengge-pages, branch: main }
+    cf: { kind: pages, project: yunmengge, domain: 2244444.xyz, build: none }
+    publish_surface: { top_level: 26, dev_archive: _dev-archive/ (gitignored, 不发布) }
+    api: { local_functions: [], rest: shared_worker }   # 无本地 API
+    pages_groups: { tests: 6, results: 12, general: 7, articles: 0 (单文件 article.html/blog.html), other: 26 }
+    open_items: [memory-test 页 title 跨站残留"寻梦阁"（新发现, 报告制）]
+
+shared_backend:
+  repo: { org: DAOSHISANYE-svg, name: yunmengge-router, branch: main }
+  cf: { kind: worker_service, name: yunmengge-router }
+  routes: ["api.33333344.xyz/*", "33333344.xyz/api/*", "2244444.xyz/api/*"]
+  bindings:
+    d1: { name: yunmengge-db, database_id: 65cdd645-a790-4e3f-9703-3167d34f9b18, isolation: "site 列 (xunmengge/yunmengge)" }
+    kv: { name: yunmengge-cache, id: "35a50ced…", optional: true, guard: "env 缺失自动跳过" }
+    durable_object: { name: RATE_LIMITER, class: RateLimiter }
+  secrets_slots: [ADMIN_PASSWORD_HASH, JWT_SECRET, PII_KEY, PII_ENCRYPT]   # 槽位，值不落文档
+  api_contract: { file: api-manifest.json, exact: 58, prefix: 7, regen: "node scripts/pre-deploy-check.mjs --gen-manifest" }
+  migrations: { files: [002-add-site-to-content-tables.sql, 003-relax-username-unique.sql, 004-client-errors.sql, compliance-2026-07-18.sql], auto_in_ci: [003, compliance], manual: [002, 004], schema_source: migrations/SCHEMA.md }
+  health_probe: { url: "https://33333344.xyz/api/health", expect: "200 + status=ok + service=yunmengge-router-v7 (version 动态, 勿比固定值)" }
+
+deploy_order: ["d1+kv+secrets", "yunmengge-router", "xunmengge-pages", "yunmengge-pages", "custom-domains"]
+
+invariants:   # 漂移守卫断言（sites-drift-guard 机器核）
+  - "双仓 remote -v 名与本文件 repo.name 一致"
+  - "CF Pages 项目 xunmengge/yunmengge 存在且绑定对应域"
+  - "/api/health = 200 + service 标签"
+  - "_dev-archive/ 在双仓 git tracked = 0"
+  - "三仓 DEPLOY.md + AGENTS.md 存在"
+  - "pages 目录计数容差 ±2（新页面可加，删需更新本文件）"
