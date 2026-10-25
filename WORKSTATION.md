@@ -43,3 +43,22 @@
 | 备份纪律 | `backups/` 7 天滚动；`scattered-bak` 安全网 2026-11-08 期满且无事故→归档压缩删（排程） |
 | 真机 | adb `RCUUO4DNN9XRO5PQS`（IP 不在 192.168.2.x 时白屏，走 adb） |
 维护规则：改动只走仓+gate；本机故障≠站点故障（双站在 CF，本机只影响工程链，非发布链）。
+
+### 软件层（本机安装，2026-10-25 实测版本）
+| 软件 | 版本 | 位置/用途 |
+|---|---|---|
+| Karing | karingService.exe | `C:/Program Files/Karing/`，:3066 git/CONNECT 隧道服务（自启） |
+| GitHub CLI | gh 2.102.0 | 系统 PATH |
+| Node.js | v26.7.0（PATH）/ 26.12.1（tools） | `E:/hermes/tools/node-*` |
+| npm | 12.0.2 | `E:/hermes/tools/npm-*` |
+| Python | 3.14.9（PATH）/ 3.14.7（tools） | `E:/hermes/tools/python-*`；uv 运行器 0.12.3/0.13.5 |
+| git | 2.53.0 | 系统 PATH |
+| ffmpeg | 8.1.1（PATH）/ 9.0.1（tools） | `E:/hermes/tools/ffmpeg-*` |
+| ripgrep | 15.2.0 | `E:/hermes/tools/ripgrep-*` |
+| agent-browser | 0.26.0 | `E:/hermes/tools/`（无头浏览器/走查） |
+| chromium | 1208 | `E:/hermes/tools/chromium-1208/` |
+| cua-driver | 0.21.0 | `E:/hermes/tools/`（桌面视觉） |
+| Hermes 本体 | — | `E:/hermes/`（73 顶层目录，含 venv `installs/`、cron、skills、tools） |
+| LLM 网关 | :8430 | `E:/hermes/llm-key-gateway/`（只读防线，10-24 主人令） |
+| adb | platform-tools | 真机 RCUO4DNN9XRO5PQS 调试 |
+版本规则：`E:/hermes/tools/` 为本地工具箱（多版本并存，PATH 取其一）；脚本统一走 uv 的 cpython-3.11 运行器（见 workstation-check 的 PY 变量），避免系统 3.14 与脚本语法漂移。
