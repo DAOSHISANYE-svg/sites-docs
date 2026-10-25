@@ -94,10 +94,14 @@ def main():
             ts = int(NOW / 86400)
             archive_name = os.path.join(ARCHIVE, f"archived_{ts}.tar.gz")
             print(f"[ARCHIVE] {archive_name}")
-            subprocess.run(
+            tar_rc = subprocess.run(
                 "tar -czf " + archive_name + " -C " + BK + " " + " ".join([d for d, _ in stale_bk]),
-                shell=True, capture_output=True, text=True, timeout=300)
-            archived = len(stale_bk)
+                shell=True, capture_output=True, text=True, timeout=300).returncode
+            tar_ok = tar_rc == 0
+            archived = len(stale_bk) if tar_ok else 0
+            if not tar_ok:
+                print(f"[WARN] tar rc={tar_rc}, archive not created for: {archive_name}")
+                archive_name = "(tar failed)"
 
         # Log stale output (do NOT auto-delete; owner decides)
         if stale_out:
