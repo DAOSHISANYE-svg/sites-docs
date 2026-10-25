@@ -87,11 +87,11 @@ def main():
         print(f"  - {f} ({age}d)")
 
     if mode == "run":
+        ts = int(NOW / 86400)
         # Archive stale backups to backups-archive
         archived = 0
         if stale_bk:
             os.makedirs(ARCHIVE, exist_ok=True)
-            ts = int(NOW / 86400)
             archive_name = os.path.join(ARCHIVE, f"archived_{ts}.tar.gz")
             print(f"[ARCHIVE] {archive_name}")
             tar_rc = subprocess.run(

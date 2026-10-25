@@ -45,3 +45,8 @@
 | RUNBOOK.md | 事故手册（8 故障模式四段式 + 不可逆即报） | sites-docs 仓 |
 | decisions/ADR-008 | 重工具链取舍（Terraform/Pyrra/OpenAPI/混沌，评估不引入+升级触发） | sites-docs 仓 |
 | integrate.json | org 级 agent 入口（repos/docs/tools/slo/redlines map） | sites-docs 仓 |
+| workspace.layout.yaml | E:/hermes 77 顶层目录布局契约(层/保留期/缺口, 机读) | sites-docs 仓 |
+| tools/retention-audit.py | 布局漂移+盘量预算+保留期缺口+change gate 完整性断言(--check) | sites-docs 仓 tools/ |
+| tools/lifecycle-guard.py | 生命周期守卫(backups 90 天归档/output 365 天标记, --dry/--run) | sites-docs 仓 tools/ |
+| tools/dependency-graph.py | 目录依赖图谱(--check 再生 dependency-graph.dot) | sites-docs 仓 tools/ |
+| E:/hermes/output/slo-ledger.jsonl | 文件式 SLO 台账(双日 guard 全绿记账, ADR-008) | 本机(不入仓) |

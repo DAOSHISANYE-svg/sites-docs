@@ -36,7 +36,7 @@
 | 项 | 值（2026-10-25 实测） |
 |---|---|
 | 主机 | DESKTOP-VKKOMGP · Windows · 用户 junji（=公司工作站 #1） |
-| 数据根 | `E:/hermes`（HERMES_HOME：75 顶层目录，分组全树见 MACHINE-TREE.md）；E 盘已用 ≈50.8G |
+| 数据根 | `E:/hermes`（HERMES_HOME：77 顶层目录，分组全树见 MACHINE-TREE.md）；E 盘已用 ≈50.8G |
 | 网络服务 | Karing `karingService.exe`（:3066，计划任务 **Karing Autorun** 自启，双进程）；LLM 网关 **:8430** 在跑 |
 | 自动化 | `hermes cron` 61 任务（含 sites-drift-guard-cron 02852915324d 每日 9/21 巡检） |
 | 安全防线 | `E:/hermes/llm-key-gateway/` 只读核心 7 文件（目录共 61 件，10-24 主人令，改动=六步流程+_sha_drift）；密钥 `config/keys/.cf_token` + GitHub GCM token 仅槽位引用 |
@@ -58,7 +58,7 @@
 | agent-browser | 0.26.0 | `E:/hermes/tools/`（无头浏览器/走查） |
 | chromium | 1208 | `E:/hermes/tools/chromium-1208/` |
 | cua-driver | 0.21.0 | `E:/hermes/tools/`（桌面视觉） |
-| Hermes 本体 | — | `E:/hermes/`（73 顶层目录，含 venv `installs/`、cron、skills、tools） |
+| Hermes 本体 | — | `E:/hermes/`（77 顶层目录，含 venv `installs/`、cron、skills、tools） |
 | LLM 网关 | :8430 | `E:/hermes/llm-key-gateway/`（只读防线，10-24 主人令） |
 | adb | platform-tools | 真机 RCUO4DNN9XRO5PQS 调试 |
 版本规则：`E:/hermes/tools/` 为本地工具箱（多版本并存，PATH 取其一）；脚本统一走 uv 的 cpython-3.11 运行器（见 workstation-check 的 PY 变量），避免系统 3.14 与脚本语法漂移。

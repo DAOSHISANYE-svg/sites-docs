@@ -2,7 +2,7 @@
 > 生成 2026-10-25 实测（dir 清点/netstat/schtasks/hostname）。用途：本机全量资产视图；WORKSTATION.md 台账=本篇摘选。
 > 纪律：只注已实证用途；未实证=标"未注"；凭据只标槽位不落值。
 
-## 1. 数据层 `E:/hermes`（HERMES_HOME，75 顶层目录）
+## 1. 数据层 `E:/hermes`（HERMES_HOME，77 顶层目录）
 ### 1.1 核心运行面（高频）
 - `cron/`(14) 定时任务注册+输出 · `cron-memory/`(13) 跨会话记忆
 - `skills/`(88) 技能库 · `plugins/`(4) · `profiles/`(7) 多 profile
