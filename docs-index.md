@@ -1,4 +1,5 @@
-# docs-index.md · 双站文档系统总索引（indexed-or-it-doesn't-exist）
+# docs-index.md · 双站文档系统总索引
+> 本文件随文档仓 `DAOSHISANYE-svg/sites-docs`（https://github.com/DAOSHISANYE-svg/sites-docs）版本化。（indexed-or-it-doesn't-exist）
 > 生成 2026-10-25 · 规则：每个文档恰好一个家（one home per fact）；新增文档必须入本索引。
 
 ## 入口层（活体，其他 AI 第一跳）
@@ -28,11 +29,11 @@
 ## 守卫层（机器）
 | 资产 | 职责 |
 |---|---|
-| sites-drift-guard.py + cron 02852915324d | 22+ 断言：文档声明 vs 活体现实（仓名/同步/发布面/活体/CF 项目） |
+| sites-drift-guard.py + cron 02852915324d | 机器断言：文档声明 vs 活体现实（全量见脚本输出）（仓名/同步/发布面/活体/CF 项目） |
 | 双仓 Pages deploy.yml 三道门（ci-xss-gate + frontend-deps-check 前置门, nav-smoke 后置门）/ router CI smoke→promote | 部署=带自验证（防"push≠上线"与"路由抖动环"回归） |
 
 ## ADR 列表（append-only，supersede 不改史）
-- 001 零 build CF Pages · 002 共享 D1 site 列 · 003 结果键 5 套并存（待定夺）· 004 内容零改动红线 · 005 Karing 代理+90s 窗口 · 006 告警走文件+exit0
+- 001 零 build CF Pages · 002 共享 D1 site 列 · 003 结果键 5 套并存（待定夺）· 004 内容零改动红线 · 005 Karing 代理+90s 窗口 · 006 告警走文件+exit0 · 007 GitHub API 走 Karing CONNECT 隧道（本机 github 段直连全阻）
 
 ## 明确不做（防双家漂移）
 - agent.json（/.well-known）= sites.manifest.yaml 的活体副本 → 违反 one home，不做；活体 agent 入口=llms.txt
