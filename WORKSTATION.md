@@ -62,3 +62,32 @@
 | LLM 网关 | :8430 | `E:/hermes/llm-key-gateway/`（只读防线，10-24 主人令） |
 | adb | platform-tools | 真机 RCUO4DNN9XRO5PQS 调试 |
 版本规则：`E:/hermes/tools/` 为本地工具箱（多版本并存，PATH 取其一）；脚本统一走 uv 的 cpython-3.11 运行器（见 workstation-check 的 PY 变量），避免系统 3.14 与脚本语法漂移。
+
+## 变更治理门禁（Change Gate Protocol）
+
+**规则**：对以下文件的任意编辑，**必须**先创 `change` 类型 gate record，编辑后再写入 `result`/`evidence`。
+
+| 受保护文件 | 路径 |
+|---|---|
+| 布局契约 | `workspace.layout.yaml` |
+| 机器树 | `MACHINE-TREE.md` |
+| 事故手册 | `RUNBOOK.md` |
+| 文档索引 | `docs-index.md` |
+| 保留期审计 | `tools/retention-audit.py` |
+| 工作站检查 | `tools/workstation-check.py` |
+
+**Gate record 模板**（type=change）：
+```json
+{
+  "ts": "<ISO8601>",
+  "writer": "<agent 名>",
+  "type": "change",
+  "subject": "编辑 workspace.layout.yaml 保留期策略",
+  "affected_dirs": ["backups", "output"],
+  "reason": "backups 53 子目录在 GC 外，需标记 gap",
+  "evidence": "git diff --stat HEAD~1..HEAD workspace.layout.yaml",
+  "result": "success"
+}
+```
+
+**断言位置**：`retention-audit.py --check` 自动检测 `change_gates_total` 并验证每条含 `subject/affected_dirs/reason/evidence`；缺失任何字段则 `change_gate_valid: false`（报告，不 FAIL）。

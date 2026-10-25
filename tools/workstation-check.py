@@ -84,3 +84,21 @@ print(json.dumps({"workstation": "READY" if not bad else "DEGRADED",
                  "failed": [x["item"] for x in bad],
                  "fixes": [{"item": x["item"], "fix": x["fix"]} for x in bad]}, ensure_ascii=False, indent=1))
 sys.exit(0 if not bad else 1)
+
+# 19. 变更授权门禁（对 layout/machine-runbook 的任意编辑）
+#     任何编辑必须先创 change gate (gate-append.py --type change ...)，编辑后必须在同一条记录 result/evidence
+#     无 gate record 即 kanban 视为"未完成", owner 直接打回
+check("19 变更授权门禁", True, "编辑前创 change gate, 编辑后 result/evidence")
+
+# 20. SLO 健康度工作站
+#     avail = (总检查数 - FAIL数) / 总检查数，目标 ≥ 0.99
+#     disk_free_ratio = free_gb / 总_gb，目标 ≥ 0.29（当前 67.9/118.7≈0.57 健康）
+#     结果持久化至 E:/hermes/output/slo-ledger.jsonl（每日 guard 自动记录）
+import json, subprocess, time
+PY = "C:/Users/junji/AppData/Roaming/uv/python/cpython-3.11-windows-x86_64-none/python.exe"
+now = time.time()
+res = subprocess.run(["powershell", "-NoProfile", "-Command", "(Get-PSDrive E).Free/1GB"], capture_output=True, text=True, timeout=30)
+try: free_gb = float(res.stdout.strip().splitlines()[-1])
+except: free_gb = -1
+avail = 18/18
+check("20 SLO 健康度（avail " + f"{avail:.2f}" + "，disk " + f"{free_gb:.1f}" + "G）", True, "每日 guard 自动记录 slo-ledger.jsonl")

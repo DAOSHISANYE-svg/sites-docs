@@ -35,6 +35,29 @@ def main(check_mode):
         free_gb = float(r.stdout.strip().splitlines()[-1])
     except Exception:
         free_gb = -1
+    # 保留期缺口（报告，不 FAIL）
+    retention_gaps = [e["dir"] for e in entries if e["gap"]]
+
+    # change gate 完整性验证
+    _change_entries = []
+    try:
+        with open(r"E:/hermes/output/gate-checks.jsonl", encoding="utf-8") as _gf:
+            for _line in _gf:
+                if not _line.strip():
+                    continue
+                try:
+                    _o = json.loads(_line)
+                except Exception:
+                    continue
+                if _o.get("type") == "change":
+                    _change_entries.append(_o)
+    except Exception:
+        pass
+    change_gate_valid = all(
+        bool(e.get("subject") and e.get("affected_dirs") and e.get("reason") and e.get("evidence"))
+        for e in _change_entries
+    )
+
     report = {
         "ts": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
         "layout_entries": len(entries),
@@ -44,19 +67,27 @@ def main(check_mode):
         "disk_free_gb": round(free_gb, 1),
         "disk_budget_gb": 20,
         "disk_ok": free_gb >= 20,
-        "retention_gaps": [e["dir"] for e in entries if e["gap"]],
+        "retention_gaps": retention_gaps,
+        "change_gates_total": len(_change_entries),
+        "change_gate_valid": change_gate_valid,
     }
+
     if not check_mode:
         print(json.dumps(report, ensure_ascii=False, indent=1))
         return 0
     fails = []
-    if missing: fails.append(f"布局漂移: {len(missing)} 个新目录未入契约 {missing[:6]}")
-    if stale: fails.append(f"契约陈旧: {stale[:6]} 已删")
-    if not report["disk_ok"]: fails.append(f"E 盘 free {report['disk_free_gb']}G < 20G 预算")
+    if missing:
+        fails.append(f"布局漂移: {len(missing)} 个新目录未入契约 {missing[:6]}")
+    if stale:
+        fails.append(f"契约陈旧: {stale[:6]} 已删")
+    if not report["disk_ok"]:
+        fails.append(f"E 盘 free {report['disk_free_gb']}G < 20G 预算")
     print(json.dumps(report, ensure_ascii=False, indent=1))
     if fails:
-        print("[DRIFT] " + " | ".join(fails)); return 1
-    print("[OK] 布局/盘量断言全绿（保留期缺口仅报告, 不 FAIL）"); return 0
+        print("[DRIFT] " + " | ".join(fails))
+        return 1
+    print("[OK] 布局/盘量断言全绿（保留期缺口仅报告, 不 FAIL; change gate " + str(report["change_gates_total"]) + " 条）")
+    return 0
 
 if __name__ == "__main__":
     sys.exit(main("--check" in sys.argv))
