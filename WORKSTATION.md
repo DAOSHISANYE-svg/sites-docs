@@ -36,10 +36,10 @@
 | 项 | 值（2026-10-25 实测） |
 |---|---|
 | 主机 | DESKTOP-VKKOMGP · Windows · 用户 junji（=公司工作站 #1） |
-| 数据根 | `E:/hermes`（HERMES_HOME: cron/keys/gate/tools/backups + `workspace-repos/` 四仓）；E 盘已用 ≈50.8G |
+| 数据根 | `E:/hermes`（HERMES_HOME：75 顶层目录，分组全树见 MACHINE-TREE.md）；E 盘已用 ≈50.8G |
 | 网络服务 | Karing `karingService.exe`（:3066，计划任务 **Karing Autorun** 自启，双进程）；LLM 网关 **:8430** 在跑 |
 | 自动化 | `hermes cron` 61 任务（含 sites-drift-guard-cron 02852915324d 每日 9/21 巡检） |
-| 安全防线 | `E:/hermes/llm-key-gateway/` 7 文件只读（10-24 主人令，改动=六步流程+_sha_drift）；密钥 `config/keys/.cf_token` + GitHub GCM token 仅槽位引用 |
+| 安全防线 | `E:/hermes/llm-key-gateway/` 只读核心 7 文件（目录共 61 件，10-24 主人令，改动=六步流程+_sha_drift）；密钥 `config/keys/.cf_token` + GitHub GCM token 仅槽位引用 |
 | 备份纪律 | `backups/` 7 天滚动；`scattered-bak` 安全网 2026-11-08 期满且无事故→归档压缩删（排程） |
 | 真机 | adb `RCUUO4DNN9XRO5PQS`（IP 不在 192.168.2.x 时白屏，走 adb） |
 维护规则：改动只走仓+gate；本机故障≠站点故障（双站在 CF，本机只影响工程链，非发布链）。
