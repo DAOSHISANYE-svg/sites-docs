@@ -19,6 +19,10 @@
 | decisions/ADR-00X | 为什么这样设计（7 条，见下） | workspace/decisions/ |
 | B8 报告（19 项定夺） | 哪些内容项等主人定夺 | C:/Users/junji/.hermes/output/xmg-b8-content-qa-report.md |
 
+| WORKSTATION.md | 把一台机器变成双站工作站（onboarding 10 分钟） | workspace/（sites-docs 仓） |
+| tools/workstation-check.py | 本机就绪 9 项自检（一条命令） | sites-docs 仓 |
+| tools/karing-github-api.py | GitHub REST API（Karing CONNECT 隧道） | sites-docs 仓（ADR-007） |
+
 ## 执行层（各仓）
 | 文档 | 唯一问题 |
 |---|---|
