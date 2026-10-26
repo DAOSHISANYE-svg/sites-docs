@@ -26,3 +26,10 @@
 ## 影响
 - 新增 `tools/backup-integrity-check.py`（sites-docs）+ cron 每日 + 守卫 §14 断言"备份完整性台账 ≤30h"。
 - `d1-backups/` 保留 7 天滚动（与 backup log 一致）；integrity 台账 append-only 到 `output/backup-integrity.jsonl`。
+
+## 补充（2026-10-26 24:0x · L4 破局）
+- **L4 原定义 "真恢复需 D1 写 scope = blocked-on-scope" 已破**，拆为三级：
+  - **L4-local（已闭环）**：`tools/d1-restore-drill.py` 把最新备份 SQL 灌入全新 SQLite :memory:，断言全语句可执行 + 25 表 + 行数抽检。cron `c48818593733` 每日 04:30。
+  - **L4-prod-read（已闭环）**：`--prod-check` 模式用 `config/keys/.env` 的 `CLOUDFLARE_API_TOKEN`（cfut_，实证 D1 读权限）做 备份↔生产 D1 表结构+行数只读对照，首跑 **25/25 表 + 行数全一致**。cron `928ec17f944a`（wrapper `d1-restore-drill-prod.py`）每日 04:35。
+  - **L4-prod-write（保留为不可逆末手段）**：把备份写回生产 D1。不自动化；触发=主人一句授权 + RUNBOOK "D1 恢复（末手段）"节执行；执行前必做 L4-local+L4-prod-read 双绿。
+- 密钥事实：`CLOUDFLARE_API_TOKEN`（.env L39，wrangler deploy 用）具备 D1:read（200 列出 xunmengge-db/mysite-db）+ Pages:read；写 D1 权限未授（本 ADR 不假设，末手段执行时实探 401 即回退申请）。

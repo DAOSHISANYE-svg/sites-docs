@@ -58,3 +58,8 @@
 ## 9. 升级路径
 Bot（Hermes）自决执行「可逆 + 授权内」→ 落 gate → 报主人结论+证据。
 「不可逆 / 越权 / 生产写 / 密钥 / zone/DNS/回滚」→ 只报不动，等主人。
+
+### 故障 9：D1 数据丢失 → 备份恢复（L4-prod-write，不可逆末手段）
+**前置**：L4-local（d1-restore-drill）+ L4-prod-read（--prod-check）双绿；主人明确授权（不可逆）。
+**步骤**：① 停写（临时下线双站前端 or 置 D1 只读）② 生产 D1 当前状态最后导出留证（backup-d1.py）③ 用备份 SQL 恢复（D1 恢复机制：export-then-import，非裸 INSERT——写操作前先在 staging DB 演练）④ 行数对照（prod-check 逻辑反向）⑤ 放写 ⑥ 双站 smoke。
+**回退**：恢复前留证导出 = 回滚源。
