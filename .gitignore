@@ -1,3 +1,9 @@
 .wrangler/
 .wrangler-tmp/
 *.log
+# 嵌套仓目录/构建物 (2026-10-26 L4 批污染修复)
+simishuwu/
+yunmengge-pages/
+yunmengge-router/
+**/__pycache__/
+*.pyc
